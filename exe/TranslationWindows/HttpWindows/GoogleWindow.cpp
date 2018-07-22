@@ -4,7 +4,7 @@
 
 #define TKK
 
-
+#ifdef TKK
 int64_t vi(int64_t r, std::string o)
 {
 	for(size_t t = 0; t < o.length() - 2; t += 3)
@@ -22,8 +22,8 @@ std::string tk(const wchar_t *pStr)
 {
 	std::wstring r(pStr);
 
-	int64_t m = 425586;
-	int64_t s = 2342038670;
+	int64_t m = 425635;
+	int64_t s = 1953544246;
 	std::vector<int64_t> S;
 
 	for(size_t v = 0; v < r.length(); v++)
@@ -66,7 +66,7 @@ std::string tk(const wchar_t *pStr)
 
 	return std::to_string(p) + "." + std::to_string(p ^ m);
 }
-
+#endif
 
 GoogleWindow::GoogleWindow() : HttpWindow(L"Google", L"https://translate.google.com/")
 {
@@ -123,7 +123,7 @@ wchar_t *GoogleWindow::GetTranslationPath(Language src, Language dst, const wcha
 
 	std::string tkStr = tk(text);
 
-	swprintf(out, len, path, srcString, dstString, tkStr.c_str(), text);
+	swprintf(out, len, path, srcString, dstString, tkStr.c_str(), etext);
 #endif
 	free(etext);
 	return out;
