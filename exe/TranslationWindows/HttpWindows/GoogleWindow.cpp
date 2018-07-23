@@ -31,18 +31,22 @@ std::string tk(const wchar_t *pStr)
 		int64_t A = (int32_t)r.at(v);
 		if(128 > A)
 			S.push_back(A);
-		else if(2048 > A)
-			S.push_back(A >> 6 | 192);
-		else if(55296 == (64512 & A) && v + 1 < r.length() && 56320 == (64512 & r.at(v + 1)))
-		{
-			A = 65536 + ((1023 & A) << 10) + (1023 & r.at(++v));
-			S.push_back(A >> 18 | 240);
-			S.push_back(A >> 12 & 63 | 128);
-		}
 		else
 		{
-			S.push_back(A >> 12 | 224);
-			S.push_back(A >> 6 & 63 | 128);
+			if(2048 > A)
+				S.push_back(A >> 6 | 192);
+			else if(55296 == (64512 & A) && v + 1 < r.length() && 56320 == (64512 & r.at(v + 1)))
+			{
+				A = 65536 + ((1023 & A) << 10) + (1023 & r.at(++v));
+				S.push_back(A >> 18 | 240);
+				S.push_back(A >> 12 & 63 | 128);
+			}
+			else
+			{
+				S.push_back(A >> 12 | 224);
+				S.push_back(A >> 6 & 63 | 128);
+			}
+
 			S.push_back(63 & A | 128);
 		}
 	}
