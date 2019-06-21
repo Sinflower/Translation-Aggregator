@@ -1,6 +1,6 @@
 #include <Shared/Shrink.h>
 #include "BaiduWindow.h"
-
+#include <stdint.h>
 
 int64_t n(int64_t r, std::string o)
 {
@@ -81,10 +81,11 @@ std::string e(const char *pStr)
 }
 
 
-BaiduWindow::BaiduWindow() : HttpWindow(L"Baidu", L"http://fanyi.baidu.com/")
+BaiduWindow::BaiduWindow() : HttpWindow(L"Baidu", L"https://fanyi.baidu.com/")
 {
 	host = L"fanyi.baidu.com";
 	path = L"/v2transapi";
+	port = 443;
 	postPrefixTemplate = "from=%s&to=%s&query=%s&token=%s&sign=%s";
 	requestHeaders = L"Content-Type: application/x-www-form-urlencoded; charset=UTF-8;";
 	dontEscapeRequest = true;
@@ -207,11 +208,14 @@ char *BaiduWindow::GetTranslationPrefix(Language src, Language dst, const char *
 	if(!m_pCookie)
 	{
 		GetCookie();
-		wchar_t *pBuf = (wchar_t*)malloc((wcslen(requestHeaders) + 1) * sizeof(wchar_t) + (wcslen(m_pCookie) + 1) * sizeof(wchar_t));
-		swprintf(pBuf, L"%s%s", requestHeaders, m_pCookie);
-		free(m_pCookie);
-		m_pCookie = pBuf;
-		requestHeaders = m_pCookie;
+		if(m_pCookie)
+		{
+			wchar_t *pBuf = (wchar_t*)malloc((wcslen(requestHeaders) + 1) * sizeof(wchar_t) + (wcslen(m_pCookie) + 1) * sizeof(wchar_t));
+			swprintf(pBuf, L"%s%s", requestHeaders, m_pCookie);
+			free(m_pCookie);
+			m_pCookie = pBuf;
+			requestHeaders = m_pCookie;
+		}
 	}
 	if(m_token[0] == 0)
 		GetToken();

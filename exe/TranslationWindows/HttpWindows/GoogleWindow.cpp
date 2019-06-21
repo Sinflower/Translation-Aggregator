@@ -2,6 +2,8 @@
 #include "GoogleWindow.h"
 #include <Shared/StringUtil.h>
 
+#include <stdint.h>
+
 #define TKK
 
 #ifdef TKK
@@ -72,7 +74,7 @@ std::string tk(const wchar_t *pStr)
 }
 #endif
 
-GoogleWindow::GoogleWindow() : HttpWindow(L"Google", L"https://translate.google.com/")
+GoogleWindow::GoogleWindow() : HttpWindow(L"Google", L"http://translate.google.com/")
 {
 	host = L"translate.google.com";
 #ifndef TKK
@@ -112,11 +114,14 @@ wchar_t *GoogleWindow::GetTranslationPath(Language src, Language dst, const wcha
 		free(m_pCookie);
 		m_tlCnt = 0;
 		GetCookie();
-		wchar_t *pBuf = (wchar_t*)malloc((wcslen(m_pOrgRequestHeaders) + 10) * sizeof(wchar_t) + (wcslen(m_pCookie) + 1) * sizeof(wchar_t));
-		swprintf(pBuf, L"%s;Cookie: %s", m_pOrgRequestHeaders, m_pCookie);
-		free(m_pCookie);
-		m_pCookie = pBuf;
-		requestHeaders = m_pCookie;
+		if(m_pCookie)
+		{
+			wchar_t *pBuf = (wchar_t*)malloc((wcslen(m_pOrgRequestHeaders) + 10) * sizeof(wchar_t) + (wcslen(m_pCookie) + 1) * sizeof(wchar_t));
+			swprintf(pBuf, L"%s;Cookie: %s", m_pOrgRequestHeaders, m_pCookie);
+			free(m_pCookie);
+			m_pCookie = pBuf;
+			requestHeaders = m_pCookie;
+		}
 	}
 
 	m_tlCnt++;
