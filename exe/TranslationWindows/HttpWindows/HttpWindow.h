@@ -87,5 +87,6 @@ protected:
 
 	void GetCookie();
 	HANDLE m_hCookieHttpEvent;
-	wchar_t *m_pCookie;
+	std::wstring m_cookie;
+	std::wstring m_cookiePath;
 };
