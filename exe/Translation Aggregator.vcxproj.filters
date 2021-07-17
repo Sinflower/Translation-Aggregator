@@ -218,6 +218,9 @@
     <ClCompile Include="TranslationWindows\HttpWindows\YandexWindow.cpp">
       <Filter>Source Files\TranslationWindows\HttpWindows</Filter>
     </ClCompile>
+    <ClCompile Include="TranslationWindows\HttpWindows\DeepLWindow.cpp">
+      <Filter>Source Files\TranslationWindows\HttpWindows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BufferedSocket.h">
@@ -404,6 +407,9 @@
       <Filter>Source Files\TranslationWindows\HttpWindows</Filter>
     </ClInclude>
     <ClInclude Include="TranslationWindows\HttpWindows\YandexWindow.h">
+      <Filter>Source Files\TranslationWindows\HttpWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslationWindows\HttpWindows\DeepLWindow.h">
       <Filter>Source Files\TranslationWindows\HttpWindows</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,7 +17,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0A8742E2-930E-400E-82D0-ABD74B7DE3AD}</ProjectGuid>
     <RootNamespace>Translation Aggregator</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -25,7 +25,7 @@
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release WinXP|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -39,7 +39,7 @@
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>false</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -96,7 +96,7 @@
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)3rd Party\PicoSHA2\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)3rd Party\Json;$(SolutionDir)3rd Party\PicoSHA2\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NO_GZCOMPRESS;WIN32;_DEBUG;_WINDOWS;HAVE_CONFIG_H;PCRE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -137,7 +137,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)3rd Party\picoSHA2\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)3rd Party\Json;$(SolutionDir)3rd Party\picoSHA2\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NO_GZCOMPRESS;WIN32;NDEBUG;_WINDOWS;HAVE_CONFIG_H;PCRE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
@@ -234,6 +234,7 @@
     <ClCompile Include="Dialogs\MyToolTip.cpp" />
     <ClCompile Include="TranslationWindows\HttpWindows\BabylonWindow.cpp" />
     <ClCompile Include="TranslationWindows\HttpWindows\BaiduWindow.cpp" />
+    <ClCompile Include="TranslationWindows\HttpWindows\DeepLWindow.cpp" />
     <ClCompile Include="TranslationWindows\HttpWindows\FreeTranslationWindow.cpp" />
     <ClCompile Include="TranslationWindows\HttpWindows\InfoseekWindow.cpp" />
     <ClCompile Include="TranslationWindows\HttpWindows\LECOnlineWindow.cpp" />
@@ -361,6 +362,7 @@
     <ClInclude Include="Dialogs\MyToolTip.h" />
     <ClInclude Include="TranslationWindows\HttpWindows\BabylonWindow.h" />
     <ClInclude Include="TranslationWindows\HttpWindows\BaiduWindow.h" />
+    <ClInclude Include="TranslationWindows\HttpWindows\DeepLWindow.h" />
     <ClInclude Include="TranslationWindows\HttpWindows\FreeTranslationWindow.h" />
     <ClInclude Include="TranslationWindows\HttpWindows\InfoseekWindow.h" />
     <ClInclude Include="TranslationWindows\HttpWindows\LECOnlineWindow.h" />
