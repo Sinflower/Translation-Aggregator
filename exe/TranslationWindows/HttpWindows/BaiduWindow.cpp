@@ -2,6 +2,10 @@
 #include "BaiduWindow.h"
 #include <stdint.h>
 
+static const std::wstring SPEED_ERROR = L"{\"errno\":1022,\"errmsg\":\"\\u8bbf\\u95ee\\u51fa\\u73b0\\u5f02\\u5e38\\uff0c\\u8bf7\\u5237\\u65b0\\u540e\\u91cd\\u8bd5\\uff01\",\"error\":1022,\"errShowMsg\":\"\\u8bbf\\u95ee\\u51fa\\u73b0\\u5f02\\u5e38\\uff0c\\u8bf7\\u5237\\u65b0\\u540e\\u91cd\\u8bd5\\uff01\"}";
+static const std::wstring SPEED_ERROR_MSG = L"ERROR: Too many requests, please try again in a few seconds.";
+
+
 int64_t n(int64_t r, std::string o)
 {
 	for(size_t t = 0; t < o.length() - 2; t += 3)
@@ -86,7 +90,7 @@ BaiduWindow::BaiduWindow() : HttpWindow(L"Baidu", L"https://fanyi.baidu.com/")
 	host = L"fanyi.baidu.com";
 	path = L"/v2transapi";
 	port = 443;
-	postPrefixTemplate = "from=%s&to=%s&query=%s&token=%s&sign=%s";
+	postPrefixTemplate = "from=%s&to=%s&query=%s&token=%s&sign=%s&transtype=realtime&simple_means_flag=3&domain=common";
 	requestHeaders = L"Content-Type: application/x-www-form-urlencoded; charset=UTF-8;";
 	dontEscapeRequest = true;
 	memset(m_token, 0, 33);
@@ -98,6 +102,18 @@ BaiduWindow::~BaiduWindow()
 
 wchar_t *BaiduWindow::FindTranslatedText(wchar_t* html)
 {
+	std::wstring htmlStr(html);
+	if (htmlStr == SPEED_ERROR)
+	{
+		if (SPEED_ERROR_MSG.length() < htmlStr.length())
+		{
+			swprintf(html, SPEED_ERROR_MSG.c_str());
+			return html;
+		}
+		else
+			return NULL;
+	}
+
 	if(ParseJSON(html, L"{\"dst\":\"", L"{\"dst\":\""))
 		return html;
 	if(ParseJSON(html, L"\"result\":\"", NULL))

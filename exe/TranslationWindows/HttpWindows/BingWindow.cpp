@@ -121,7 +121,7 @@ void BingWindow::getToken()
 						}
 					} while (dwSize > 0);
 
-					const int32_t pos = data.find("var params_RichTranslateHelper");
+					const int32_t pos = data.find("var params_AbusePreventionHelper");
 					if (pos != std::string::npos)
 					{
 						const int32_t startK = data.find("[", pos);

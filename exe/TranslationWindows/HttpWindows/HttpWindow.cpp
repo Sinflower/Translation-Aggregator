@@ -616,11 +616,11 @@ void HttpWindow::GetCookie()
 			WinHttpSetStatusCallback(hRequest, HttpCookieCallback, WINHTTP_CALLBACK_FLAG_ALL_NOTIFICATIONS | WINHTTP_CALLBACK_FLAG_DATA_AVAILABLE | WINHTTP_CALLBACK_FLAG_REQUEST_ERROR | WINHTTP_CALLBACK_FLAG_CLOSE_CONNECTION | WINHTTP_CALLBACK_STATUS_HEADERS_AVAILABLE, 0);
 			if(WinHttpSendRequest(hRequest, WINHTTP_NO_ADDITIONAL_HEADERS, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, (DWORD_PTR) this))
 			{
-				WaitForSingleObject(m_hCookieHttpEvent, 5000); // Wait 5 sec. for the event to be set
+				WaitForSingleObject(m_hCookieHttpEvent, 2000); // Wait 2 sec. for the event to be set
 				if(WinHttpReceiveResponse(hRequest, NULL))
 				{
 					ResetEvent(m_hCookieHttpEvent);
-					WaitForSingleObject(m_hCookieHttpEvent, 5000); // Wait 5 sec. for the event to be set
+					WaitForSingleObject(m_hCookieHttpEvent, 2000); // Wait 2 sec. for the event to be set
 					DWORD index = 0;
 					{
 						for(;;)
